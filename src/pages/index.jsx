@@ -222,7 +222,7 @@ function Photos() {
 function Developer() {
   return (
     <span className="group">
-      <span className="font-mono">&lt;</span>开发者
+      <span className="font-mono">&lt;</span>前端
       <span className="font-mono">/&gt;</span>
       <span className="group-hover:animate-typing invisible inline-flex text-zinc-300 before:content-['|'] group-hover:visible dark:text-zinc-500" />
     </span>
@@ -238,7 +238,7 @@ function Designer() {
         <span className="absolute -bottom-0.5 -left-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
         <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
       </span>
-      前端工程师
+      工程师
     </span>
   )
 }
@@ -256,11 +256,11 @@ export default function Home({ articles }) {
   return (
     <>
       <NextSeo
-        title="Brian Ketelsen"
+        title="xieyezi"
         description={siteMeta.description}
-        canonical="https://brian.dev/"
+        canonical="http://xieyezi.com"
         openGraph={{
-          url: 'https://brian.dev',
+          url: 'http://xieyezi.com',
           images: [
             {
               url: `https://og.brian.dev/api/og?title=${siteMeta.title}&desc=${siteMeta.description}`,
@@ -270,14 +270,11 @@ export default function Home({ articles }) {
               type: 'image/jpeg',
             },
           ],
-          siteName: 'brian.dev',
+          siteName: 'xieyezi',
         }}
       />
       <Container className="mt-9">
         <div className="max-w-2xl text-lg">
-          {/*<h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            Cloud Advocate, hacker, and open source enthusiast.
-          </h1>*/}
           <motion.h1
             className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl"
             initial={{ opacity: 0, y: 30 }}
@@ -293,22 +290,28 @@ export default function Home({ articles }) {
             <br />
             <OCD />
           </motion.h1>
+          <p className="prose mt-6 dark:prose-invert">我是 xieyezi，热爱生活，喜爱前端。</p>
           <p className="prose mt-6 dark:prose-invert">
-            I’m Brian, and I teach people how to use the Cloud. I’ve been active
-            in Open Source for as long as I’ve been coding &mdash; and that’s a
-            long time.
-          </p>
-          <p className="prose mt-6 dark:prose-invert">
-            With some friends, I wrote a{' '}
-            <a href="https://www.manning.com/books/go-in-action">
-              book about the Go programming language
+            
+            掌握但不限于{' '}
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+              Javascript
             </a>
-            . I’ve given many <Link href={'/speaking'}>talks</Link> about Go,
-            Distributed Computing, and programming in general.
+            , <a href="https://www.typescriptlang.org/">Typescript</a>,{' '}
+            <a href="https://vuejs.org/">Vue</a>,{' '}
+            <a href="https://react.dev/">React</a>,{' '}
+            <a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs">
+              Node.js
+            </a>{' '}
+            等技术栈, 参与了{' '}
+            <a href="https://vuejs.org/">
+              Vue.js
+            </a>
+            , <a href="https://github.com/youzan/vant">Vant</a>,{' '}
+            <a href="https://semi.design/zh-CN">Semi Design</a> 等许多开源项目。
           </p>
           <p className="prose mt-6 dark:prose-invert">
-            Poke around and see what I’m up to. It’s all open source, so feel
-            free to contribute.
+            非常欢迎大家找我沟通，可以通过以下社区主页找到我:
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink

@@ -1,10 +1,10 @@
-import React from "react"
+import React from 'react'
 import Image from 'next/future/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
-import { motion,useMotionValue,useMotionTemplate } from 'framer-motion'
+import { motion, useMotionValue, useMotionTemplate } from 'framer-motion'
 
 import { Container } from '@/components/Container'
 import avatarImage from '@/images/xieyezi.jpg'
@@ -124,12 +124,12 @@ function MobileNavigation(props) {
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-              <MobileNavItem href="/">Home</MobileNavItem>
-                <MobileNavItem href="/about">About</MobileNavItem>
-                <MobileNavItem href="/articles">Articles</MobileNavItem>
-                <MobileNavItem href="/projects">Projects</MobileNavItem>
-                <MobileNavItem href="/speaking">Speaking</MobileNavItem>
-                <MobileNavItem href="/uses">Uses</MobileNavItem>
+                <MobileNavItem href="/">首页</MobileNavItem>
+                <MobileNavItem href="/articles">文章</MobileNavItem>
+                <MobileNavItem href="/projects">项目</MobileNavItem>
+                <MobileNavItem href="/uses">工具</MobileNavItem>
+                <MobileNavItem href="/speaking">演讲</MobileNavItem>
+                <MobileNavItem href="/about">关于</MobileNavItem>
               </ul>
             </nav>
           </Popover.Panel>
@@ -166,12 +166,12 @@ function DesktopNavigation(props) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
-        <NavItem href="/">Home</NavItem>
-        <NavItem href="/about">About</NavItem>
-        <NavItem href="/articles">Articles</NavItem>
-        <NavItem href="/projects">Projects</NavItem>
-        <NavItem href="/speaking">Speaking</NavItem>
-        <NavItem href="/uses">Uses</NavItem>
+        <NavItem href="/">首页</NavItem>
+        <NavItem href="/articles">文章</NavItem>
+        <NavItem href="/projects">项目</NavItem>
+        <NavItem href="/uses">工具</NavItem>
+        <NavItem href="/speaking">演讲</NavItem>
+        <NavItem href="/about">关于</NavItem>
       </ul>
     </nav>
   )
@@ -362,7 +362,6 @@ export function Header() {
 
   const avatarTransform = useMotionTemplate`translate3d(${avatarX}rem, 0, 0) scale(${avatarScale})`
   const avatarBorderTransform = useMotionTemplate`translate3d(${avatarBorderX}rem, 0, 0) scale(${avatarBorderScale})`
-
 
   return (
     <>
