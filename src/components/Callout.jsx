@@ -26,10 +26,15 @@ export function Callout({ type = 'note', title, children }) {
   let IconComponent = icons[type]
 
   return (
-    <div className={clsx('not-prose my-8 flex rounded-3xl p-6', styles[type].container)}>
-      <IconComponent className="flex-none w-8 h-8" />
-      <div className="flex-auto ml-4">
-        <p className={clsx('m-0 font-display text-xl', styles[type].title)}>
+    <div
+      className={clsx(
+        'not-prose my-8 flex rounded-3xl p-6',
+        styles[type].container
+      )}
+    >
+      <IconComponent className="h-8 w-8 flex-none" />
+      <div className="ml-4 flex-auto">
+        <p className={clsx('font-display m-0 text-xl', styles[type].title)}>
           {title}
         </p>
         <div className={clsx('prose mt-2.5', styles[type].body)}>

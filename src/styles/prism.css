@@ -37,7 +37,7 @@ pre[class*='language-'] {
 
 .token.unit,
 .language-css .token.function {
-  color: theme('colors.teal.200');
+  color: theme('colors.lime.200');
 }
 
 .token.comment,
@@ -62,16 +62,16 @@ pre[class*='language-'] {
 }
 
 .highlight-line {
-  @apply -mx-4 border-l-4 border-teal-500 bg-zinc-700 bg-opacity-50;
+  @apply -mx-4 border-l-4 border-lime-500 bg-zinc-700 bg-opacity-50;
 }
 
 .line-number::before {
-  @apply mr-4 -ml-2 inline-block w-4 text-right text-gray-400;
+  @apply -ml-2 mr-4 inline-block w-4 text-right text-gray-400;
   content: attr(line);
 }
 /* Code title styles */
 .remark-code-title {
-  @apply rounded-t bg-slate-700 mb-0 px-5 py-3 font-mono text-sm font-bold text-zinc-200;
+  @apply mb-0 rounded-t bg-slate-700 px-5 py-3 font-mono text-sm font-bold text-zinc-200;
 }
 
 .remark-code-title + div > pre {
@@ -96,10 +96,10 @@ pre[class*='language-'] {
 }
 
 .highlight-line {
-  @apply -mx-4 border-l-4 border-teal-500  bg-gray-700 bg-opacity-50;
+  @apply -mx-4 border-l-4 border-lime-500  bg-gray-700 bg-opacity-50;
 }
 
 .line-number::before {
-  @apply mr-4 -ml-2 inline-block w-4 text-right text-zinc-400;
+  @apply -ml-2 mr-4 inline-block w-4 text-right text-zinc-400;
   content: attr(line);
 }

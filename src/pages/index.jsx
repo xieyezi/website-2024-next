@@ -13,9 +13,8 @@ import {
   LinkedInIcon,
   MastodonIcon,
   BiliBiliIcon,
-  SparkleIcon
+  SparkleIcon,
 } from '@/components/SocialIcons'
-
 
 import image3 from '@/images/photos/1102.jpg'
 import image2 from '@/images/photos/20150716-070618871-3.jpg'
@@ -23,13 +22,11 @@ import image1 from '@/images/photos/bike.jpg'
 import image5 from '@/images/photos/band.jpg'
 import image4 from '@/images/photos/BW013.jpg'
 
-
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
 import { formatDate } from '@/lib/formatDate'
-import  siteMeta, {resume} from '@/data/siteMeta'
-import { NextSeo } from 'next-seo';
-
+import siteMeta, { resume } from '@/data/siteMeta'
+import { NextSeo } from 'next-seo'
 
 function MailIcon(props) {
   return (
@@ -132,7 +129,7 @@ function Newsletter() {
           placeholder="Email address"
           aria-label="Email address"
           required
-          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
+          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-lime-500 focus:outline-none focus:ring-4 focus:ring-lime-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-lime-400 dark:focus:ring-lime-400/10 sm:text-sm"
         />
         <Button type="submit" className="ml-4 flex-none">
           Join
@@ -143,7 +140,6 @@ function Newsletter() {
 }
 
 function Resume() {
-
   return (
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
@@ -184,8 +180,12 @@ function Resume() {
           </li>
         ))}
       </ol>
-      <Button href="https://linkedin.com/in/brianketelsen" variant="secondary" className="group mt-6 w-full">
-               More on LinkedIn 
+      <Button
+        href="https://linkedin.com/in/brianketelsen"
+        variant="secondary"
+        className="group mt-6 w-full"
+      >
+        More on LinkedIn
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
     </div>
@@ -224,7 +224,7 @@ function Developer() {
     <span className="group">
       <span className="font-mono">&lt;</span>开发者
       <span className="font-mono">/&gt;</span>
-      <span className="invisible inline-flex text-zinc-300 before:content-['|'] group-hover:visible group-hover:animate-typing dark:text-zinc-500" />
+      <span className="group-hover:animate-typing invisible inline-flex text-zinc-300 before:content-['|'] group-hover:visible dark:text-zinc-500" />
     </span>
   )
 }
@@ -255,53 +255,60 @@ function OCD() {
 export default function Home({ articles }) {
   return (
     <>
-    <NextSeo
-      title="Brian Ketelsen"
-      description={siteMeta.description}
-      canonical="https://brian.dev/"
-      openGraph={{
-        url: 'https://brian.dev',
-        images: [
-          {
-            url: `https://og.brian.dev/api/og?title=${siteMeta.title}&desc=${siteMeta.description}`,
-            width: 1200,
-            height: 600,
-            alt: 'Og Image Alt',
-            type: 'image/jpeg',
-          }
-        ],
-        siteName: 'brian.dev',
-      }}
-    />
+      <NextSeo
+        title="Brian Ketelsen"
+        description={siteMeta.description}
+        canonical="https://brian.dev/"
+        openGraph={{
+          url: 'https://brian.dev',
+          images: [
+            {
+              url: `https://og.brian.dev/api/og?title=${siteMeta.title}&desc=${siteMeta.description}`,
+              width: 1200,
+              height: 600,
+              alt: 'Og Image Alt',
+              type: 'image/jpeg',
+            },
+          ],
+          siteName: 'brian.dev',
+        }}
+      />
       <Container className="mt-9">
         <div className="max-w-2xl text-lg">
           {/*<h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
             Cloud Advocate, hacker, and open source enthusiast.
           </h1>*/}
-           <motion.h1
-        className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          type: 'spring',
-          damping: 25,
-          stiffness: 100,
-          duration: 0.3,
-        }}
-      >
-        <Developer />，<Designer />，
-        <br />
-        <OCD />
-      </motion.h1>
-          <p className="mt-6 prose dark:prose-invert">
-            I’m Brian, and I teach people how to use the Cloud. I’ve been active in Open Source for as long as I’ve been coding &mdash; and that’s a long time.
+          <motion.h1
+            className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: 'spring',
+              damping: 25,
+              stiffness: 100,
+              duration: 0.3,
+            }}
+          >
+            <Developer />，<Designer />，
+            <br />
+            <OCD />
+          </motion.h1>
+          <p className="prose mt-6 dark:prose-invert">
+            I’m Brian, and I teach people how to use the Cloud. I’ve been active
+            in Open Source for as long as I’ve been coding &mdash; and that’s a
+            long time.
           </p>
-          <p className="mt-6 prose dark:prose-invert">
-            With some friends, I wrote a <a href="https://www.manning.com/books/go-in-action">book about the Go programming language</a>.
-             I’ve given many <Link href={"/speaking"} >talks</Link> about Go, Distributed Computing, and programming in general.
+          <p className="prose mt-6 dark:prose-invert">
+            With some friends, I wrote a{' '}
+            <a href="https://www.manning.com/books/go-in-action">
+              book about the Go programming language
+            </a>
+            . I’ve given many <Link href={'/speaking'}>talks</Link> about Go,
+            Distributed Computing, and programming in general.
           </p>
-          <p className="mt-6 prose dark:prose-invert">
-            Poke around and see what I’m up to. It’s all open source, so feel free to contribute.
+          <p className="prose mt-6 dark:prose-invert">
+            Poke around and see what I’m up to. It’s all open source, so feel
+            free to contribute.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
