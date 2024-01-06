@@ -58,7 +58,7 @@ export default function About() {
               type: 'image/jpeg',
             }
           ],
-          siteName: 'brian.dev',
+          siteName: 'xieyezi website',
         }}
       />
       <Container className="mt-16 sm:mt-32">
@@ -113,18 +113,21 @@ export default function About() {
               <SocialLink href={siteMeta.author.twitter} icon={TwitterIcon}>
                 Follow on Twitter
               </SocialLink>
-              <SocialLink href={siteMeta.author.mastodon} icon={MastodonIcon} className="mt-4">
+              {/*<SocialLink href={siteMeta.author.mastodon} icon={MastodonIcon} className="mt-4">
                 Follow on Mastodon
-              </SocialLink>
-              <SocialLink href={siteMeta.author.instagram} icon={InstagramIcon} className="mt-4">
+              </SocialLink>*/}
+              {/*<SocialLink href={siteMeta.author.instagram} icon={InstagramIcon} className="mt-4">
                 Follow on Instagram
-              </SocialLink>
+              </SocialLink>*/}
               <SocialLink href={siteMeta.author.github} icon={GitHubIcon} className="mt-4">
                 Follow on GitHub
               </SocialLink>
-              <SocialLink href={siteMeta.author.linkedin} icon={LinkedInIcon} className="mt-4">
-                Follow on LinkedIn
+              <SocialLink href={siteMeta.author.bilibili} icon={GitHubIcon} className="mt-4">
+                Follow on BiliBili
               </SocialLink>
+              {/*<SocialLink href={siteMeta.author.linkedin} icon={LinkedInIcon} className="mt-4">
+                Follow on LinkedIn
+              </SocialLink>*/}
               <SocialLink
                 href={`mailto:${siteMeta.author.email}`}
                 icon={MailIcon}

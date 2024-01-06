@@ -1,6 +1,7 @@
 import Image from 'next/future/image'
 import Link from 'next/link'
 import clsx from 'clsx'
+import { motion } from 'framer-motion'
 
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
@@ -10,7 +11,9 @@ import {
   InstagramIcon,
   GitHubIcon,
   LinkedInIcon,
-  MastodonIcon
+  MastodonIcon,
+  BiliBiliIcon,
+  SparkleIcon
 } from '@/components/SocialIcons'
 
 
@@ -216,6 +219,39 @@ function Photos() {
   )
 }
 
+function Developer() {
+  return (
+    <span className="group">
+      <span className="font-mono">&lt;</span>开发者
+      <span className="font-mono">/&gt;</span>
+      <span className="invisible inline-flex text-zinc-300 before:content-['|'] group-hover:visible group-hover:animate-typing dark:text-zinc-500" />
+    </span>
+  )
+}
+
+function Designer() {
+  return (
+    <span className="group relative rounded-2xl bg-black/5 p-1 dark:bg-white/5">
+      <span className="pointer-events-none absolute inset-0 border border-lime-700/90 opacity-70 group-hover:border-dashed group-hover:opacity-100 dark:border-lime-400/90">
+        <span className="absolute -left-0.5 -top-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
+        <span className="absolute -bottom-0.5 -right-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
+        <span className="absolute -bottom-0.5 -left-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
+        <span className="absolute -right-0.5 -top-0.5 h-1.5 w-1.5 border border-lime-700 bg-zinc-50 dark:border-lime-400" />
+      </span>
+      前端工程师
+    </span>
+  )
+}
+
+function OCD() {
+  return (
+    <span className="group">
+      <SparkleIcon className="mr-1 inline-flex transform-gpu transition-transform duration-500 group-hover:rotate-180" />
+      <span>细节控</span>
+    </span>
+  )
+}
+
 export default function Home({ articles }) {
   return (
     <>
@@ -239,9 +275,24 @@ export default function Home({ articles }) {
     />
       <Container className="mt-9">
         <div className="max-w-2xl text-lg">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+          {/*<h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
             Cloud Advocate, hacker, and open source enthusiast.
-          </h1>
+          </h1>*/}
+           <motion.h1
+        className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          type: 'spring',
+          damping: 25,
+          stiffness: 100,
+          duration: 0.3,
+        }}
+      >
+        <Developer />，<Designer />，
+        <br />
+        <OCD />
+      </motion.h1>
           <p className="mt-6 prose dark:prose-invert">
             I’m Brian, and I teach people how to use the Cloud. I’ve been active in Open Source for as long as I’ve been coding &mdash; and that’s a long time.
           </p>
@@ -254,32 +305,37 @@ export default function Home({ articles }) {
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
-              href={siteMeta.author.twitter}
-              aria-label="Follow on Twitter"
-              icon={TwitterIcon}
-            />
-            <SocialLink
-              href={siteMeta.author.mastodon}
-              aria-label="Follow on Mastodon"
-              icon={MastodonIcon}
-              rel="me"
-            />
-
-            <SocialLink
-              href={siteMeta.author.instagram}
-              aria-label="Follow on Instagram"
-              icon={InstagramIcon}
-            />
-            <SocialLink
               href="https://github.com"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
+              href={siteMeta.author.twitter}
+              aria-label="Follow on Twitter"
+              icon={TwitterIcon}
+            />
+            <SocialLink
+              href={siteMeta.author.bilibili}
+              aria-label="Follow on BiliBili"
+              icon={BiliBiliIcon}
+            />
+            {/*<SocialLink
+              href={siteMeta.author.mastodon}
+              aria-label="Follow on Mastodon"
+              icon={MastodonIcon}
+              rel="me"
+            />*/}
+
+            {/*<SocialLink
+              href={siteMeta.author.instagram}
+              aria-label="Follow on Instagram"
+              icon={InstagramIcon}
+            />*/}
+            {/*<SocialLink
               href={siteMeta.author.linkedin}
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
-            />
+            />*/}
           </div>
         </div>
       </Container>

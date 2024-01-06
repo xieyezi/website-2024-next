@@ -3,9 +3,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
+import {
+  motion
+} from 'framer-motion'
 
 import { Container } from '@/components/Container'
-import avatarImage from '@/images/brian-head.jpg'
+import avatarImage from '@/images/xieyezi.jpg'
 
 import { Fragment, useEffect, useRef } from 'react'
 
@@ -353,8 +356,14 @@ export function Header() {
 
   return (
     <>
-      <header
-        className="pointer-events-none relative z-50 flex flex-col"
+      <motion.header
+        //className="pointer-events-none relative z-50 flex flex-col"
+        className={clsx(
+          'pointer-events-none relative z-50 mb-[var(--header-mb,0px)] flex flex-col',
+          isHomePage
+            ? 'h-[var(--header-height,180px)]'
+            : 'h-[var(--header-height,64px)]'
+        )}
         style={{
           height: 'var(--header-height)',
           marginBottom: 'var(--header-mb)',
@@ -421,7 +430,7 @@ export function Header() {
             </div>
           </Container>
         </div>
-      </header>
+      </motion.header>
       {isHomePage && <div style={{ height: 'var(--content-offset)' }} />}
     </>
   )
