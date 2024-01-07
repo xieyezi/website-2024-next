@@ -3,13 +3,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import {
-  TwitterIcon,
-  InstagramIcon,
-  GitHubIcon,
-  LinkedInIcon,
-  MastodonIcon,
-} from '@/components/SocialIcons'
+import { TwitterIcon, GitHubIcon } from '@/components/SocialIcons'
 import portraitImage from '@/images/brian-head.jpg'
 import siteMeta from '@/data/siteMeta'
 import { NextSeo } from 'next-seo'

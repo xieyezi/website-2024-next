@@ -1,6 +1,6 @@
+import React from 'react'
 import Image from 'next/future/image'
 import Link from 'next/link'
-import clsx from 'clsx'
 import { motion } from 'framer-motion'
 
 import { Button } from '@/components/Button'
@@ -8,48 +8,24 @@ import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
 import {
   TwitterIcon,
-  InstagramIcon,
   GitHubIcon,
-  LinkedInIcon,
-  MastodonIcon,
   BiliBiliIcon,
   SparkleIcon,
+  NeteaseMusicIcon,
+  MailIcon,
 } from '@/components/SocialIcons'
-
-import image3 from '@/images/photos/1102.jpg'
-import image2 from '@/images/photos/20150716-070618871-3.jpg'
-import image1 from '@/images/photos/bike.jpg'
-import image5 from '@/images/photos/band.jpg'
-import image4 from '@/images/photos/BW013.jpg'
+import image1 from '@/images/recent/1.jpg'
+import image2 from '@/images/recent/2.jpg'
+import image3 from '@/images/recent/3.jpg'
+import image4 from '@/images/recent/4.jpg'
+import image5 from '@/images/recent/5.jpg'
+import image6 from '@/images/recent/6.jpg'
 
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
 import { formatDate } from '@/lib/formatDate'
 import siteMeta, { resume } from '@/data/siteMeta'
 import { NextSeo } from 'next-seo'
-
-function MailIcon(props) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
 
 function BriefcaseIcon(props) {
   return (
@@ -105,7 +81,7 @@ function Article({ article }) {
 function SocialLink({ icon: Icon, ...props }) {
   return (
     <Link className="group -m-1 p-1" {...props}>
-      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+      <Icon className="h-5 w-5 text-zinc-400 transition group-hover:text-zinc-700 dark:text-zinc-400 dark:group-hover:text-zinc-200" />
     </Link>
   )
 }
@@ -193,29 +169,81 @@ function Resume() {
 }
 
 function Photos() {
-  let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
+  const images = [image6, image4, image5, image1, image2, image3]
+  const alts = [
+    '我弹着吉他向我的女友求婚',
+    '我的猫端非要往装不下它的纸箱子里面钻',
+    '我的猫端坐在椅子下面',
+    '摄于照母山',
+    '摄于大竹林',
+    '家里新买的鸭脚木',
+  ]
+  const [width, setWidth] = React.useState(0)
+  const [isCompact, setIsCompact] = React.useState(false)
+  const expandedWidth = React.useMemo(() => width * 1.38, [width])
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      // 640px is the breakpoint for md
+      if (window.innerWidth < 640) {
+        setIsCompact(true)
+        return setWidth(window.innerWidth / 2 - 64)
+      }
+
+      setWidth(window.innerWidth / images.length - 4 * images.length)
+    }
+
+    window.addEventListener('resize', handleResize)
+    handleResize()
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   return (
-    <div className="mt-16 sm:mt-20">
-      <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-        {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
-          <div
+    <motion.div
+      className="mt-16 sm:mt-20"
+      initial={{ opacity: 0, scale: 0.925, y: 16 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{
+        delay: 0.5,
+        type: 'spring',
+      }}
+    >
+      <div className="-my-4 flex w-full snap-x snap-proximity scroll-pl-4 justify-start gap-4 overflow-x-auto px-4 py-4 sm:gap-6 md:justify-center md:overflow-x-hidden md:px-0">
+        {images.map((image, idx) => (
+          <motion.div
             key={image.src}
-            className={clsx(
-              'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl',
-              rotations[imageIndex % rotations.length]
-            )}
+            className="relative h-40 flex-none shrink-0 snap-start overflow-hidden rounded-xl bg-zinc-100 ring-2 ring-lime-800/20 dark:bg-zinc-800 dark:ring-lime-300/10 md:h-72 md:rounded-3xl"
+            animate={{
+              width,
+              opacity: isCompact ? 1 : 0.85,
+              filter: isCompact ? 'grayscale(0)' : 'grayscale(0.5)',
+              rotate: idx % 2 === 0 ? 2 : -1,
+            }}
+            whileHover={
+              isCompact
+                ? {}
+                : {
+                    width: expandedWidth,
+                    opacity: 1,
+                    filter: 'grayscale(0)',
+                  }
+            }
+            layout
           >
             <Image
               src={image}
-              alt=""
+              alt={alts[idx] ?? ''}
               sizes="(min-width: 640px) 18rem, 11rem"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover"
+              priority
             />
-          </div>
+          </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -263,7 +291,7 @@ export default function Home({ articles }) {
           url: 'http://xieyezi.com',
           images: [
             {
-              url: `https://og.brian.dev/api/og?title=${siteMeta.title}&desc=${siteMeta.description}`,
+              url: 'https://avatars.githubusercontent.com/u/16821989?v=4',
               width: 1200,
               height: 600,
               alt: 'Og Image Alt',
@@ -290,9 +318,10 @@ export default function Home({ articles }) {
             <br />
             <OCD />
           </motion.h1>
-          <p className="prose mt-6 dark:prose-invert">我是 xieyezi，热爱生活，喜爱前端。</p>
           <p className="prose mt-6 dark:prose-invert">
-            
+            我是 xieyezi，热爱生活，喜爱前端。
+          </p>
+          <p className="prose mt-6 dark:prose-invert">
             掌握但不限于{' '}
             <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
               Javascript
@@ -303,15 +332,12 @@ export default function Home({ articles }) {
             <a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs">
               Node.js
             </a>{' '}
-            等技术栈, 参与了{' '}
-            <a href="https://vuejs.org/">
-              Vue.js
-            </a>
-            , <a href="https://github.com/youzan/vant">Vant</a>,{' '}
+            等技术栈, 参与了 <a href="https://vuejs.org/">Vue.js</a>,{' '}
+            <a href="https://github.com/youzan/vant">Vant</a>,{' '}
             <a href="https://semi.design/zh-CN">Semi Design</a> 等许多开源项目。
           </p>
           <p className="prose mt-6 dark:prose-invert">
-            非常欢迎大家找我沟通，可以通过以下社区主页找到我:
+            除了编程之外，我还喜欢音乐、游泳、羽毛球。如果你恰好也在我现在居住的城市（目前在重庆），也许我们可以一起出去玩或者一起编程。欢迎通过以下方式和我交流：
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
@@ -329,23 +355,17 @@ export default function Home({ articles }) {
               aria-label="Follow on BiliBili"
               icon={BiliBiliIcon}
             />
-            {/*<SocialLink
-              href={siteMeta.author.mastodon}
-              aria-label="Follow on Mastodon"
-              icon={MastodonIcon}
+            <SocialLink
+              href={siteMeta.author.neteaseMusic}
+              aria-label="Follow on Netease Music"
+              icon={NeteaseMusicIcon}
+            />
+            <SocialLink
+              href={siteMeta.author.email}
+              aria-label="Email to me"
+              icon={MailIcon}
               rel="me"
-            />*/}
-
-            {/*<SocialLink
-              href={siteMeta.author.instagram}
-              aria-label="Follow on Instagram"
-              icon={InstagramIcon}
-            />*/}
-            {/*<SocialLink
-              href={siteMeta.author.linkedin}
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
-            />*/}
+            />
           </div>
         </div>
       </Container>

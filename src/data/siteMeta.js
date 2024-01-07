@@ -19,6 +19,7 @@ const siteMeta = {
     twitter: 'https://twitter.com/xieyezi666',
     github: 'https://github.com/xieyezi',
     bilibili: 'https://space.bilibili.com/44099603',
+    neteaseMusic: "https://music.163.com/#/artist?id=12478216",
     linkedin: '',
     instagram: '',
     twitch: '',
