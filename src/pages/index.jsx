@@ -366,6 +366,9 @@ export default function Home({ articles }) {
               icon={MailIcon}
               rel="me"
             />
+            <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/03423fff5b194acc17176dcb1b39d4678d5ce31f7d61ad8c3b9529efdfe0de62/68747470733a2f2f6170692e76697369746f722e706c616e747265652e6d652f76697369746f722d62616467652f70763f6c6162656c3d76697369746f72266e616d6573706163653d78696579657a69363636266b65793d696e6465782e68746d6c26636f6c6f723d626c7565">
+            <img className='w-full' src="https://camo.githubusercontent.com/03423fff5b194acc17176dcb1b39d4678d5ce31f7d61ad8c3b9529efdfe0de62/68747470733a2f2f6170692e76697369746f722e706c616e747265652e6d652f76697369746f722d62616467652f70763f6c6162656c3d76697369746f72266e616d6573706163653d78696579657a69363636266b65793d696e6465782e68746d6c26636f6c6f723d626c7565" alt="visitors" data-canonical-src="https://api.visitor.plantree.me/visitor-badge/pv?label=visitor&amp;namespace=xieyezi666&amp;key=index.html&amp;color=blue" />
+              </a>
           </div>
         </div>
       </Container>
