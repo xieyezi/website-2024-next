@@ -70,7 +70,7 @@ export default function ArticlesIndex({ articles }) {
             </div>
           </div>
           <div className="lg:order-first lg:row-span-2">
-            <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+            <h1 className="text-base font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
               Liam’s Journey - Living with Muenke Syndrome
             </h1>
             <div className="mt-6 space-y-7 text-lg text-zinc-600 dark:text-zinc-400">

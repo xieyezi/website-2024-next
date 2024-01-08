@@ -2,17 +2,19 @@ import React from 'react'
 import Image from 'next/future/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import Balancer from 'react-wrap-balancer'
 
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
 import {
+  MailIcon,
   TwitterIcon,
   GitHubIcon,
   BiliBiliIcon,
   SparkleIcon,
   NeteaseMusicIcon,
-  MailIcon,
+  PencilSwooshIcon,
 } from '@/components/SocialIcons'
 import image1 from '@/images/recent/1.jpg'
 import image2 from '@/images/recent/2.jpg'
@@ -302,7 +304,7 @@ export default function Home({ articles }) {
         }}
       />
       <Container className="mt-9">
-        <div className="max-w-2xl text-lg">
+        <div className="max-w-4xl text-lg">
           <motion.h1
             className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl"
             initial={{ opacity: 0, y: 30 }}
@@ -318,28 +320,77 @@ export default function Home({ articles }) {
             <br />
             <OCD />
           </motion.h1>
-          <p className="prose mt-6 dark:prose-invert">
-            我是 xieyezi，热爱生活，喜爱前端。
-          </p>
-          <p className="prose mt-6 dark:prose-invert">
-            掌握但不限于{' '}
-            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
-              Javascript
-            </a>
-            , <a href="https://www.typescriptlang.org/">Typescript</a>,{' '}
-            <a href="https://vuejs.org/">Vue</a>,{' '}
-            <a href="https://react.dev/">React</a>,{' '}
-            <a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs">
-              Node.js
-            </a>{' '}
-            等技术栈, 参与了 <a href="https://vuejs.org/">Vue.js</a>,{' '}
-            <a href="https://github.com/youzan/vant">Vant</a>,{' '}
-            <a href="https://semi.design/zh-CN">Semi Design</a> 等许多开源项目。
-          </p>
-          <p className="prose mt-6 dark:prose-invert">
-            除了编程之外，我还喜欢音乐、游泳、羽毛球。如果你恰好也在我现在居住的城市（目前在重庆），也许我们可以一起出去玩或者一起编程。欢迎通过以下方式和我交流：
-          </p>
-          <div className="mt-6 flex gap-6">
+          <motion.p
+            className="mt-6 text-base text-zinc-600 dark:text-zinc-400"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: 'spring',
+              damping: 30,
+              stiffness: 85,
+              duration: 0.3,
+              delay: 0.1,
+            }}
+          >
+            <Balancer>我是 xieyezi，热爱生活，喜爱前端。</Balancer>
+          </motion.p>
+          <motion.p
+            className="mt-2 text-base text-zinc-600 dark:text-zinc-400"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: 'spring',
+              damping: 30,
+              stiffness: 85,
+              duration: 0.3,
+              delay: 0.1,
+            }}
+          >
+            <Balancer>
+              掌握但不限于
+              <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+                Javascript
+              </a>
+              , <a href="https://www.typescriptlang.org/">Typescript</a>,{' '}
+              <a href="https://vuejs.org/">Vue</a>,{' '}
+              <a href="https://react.dev/">React</a>,{' '}
+              <a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs">
+                Node.js
+              </a>{' '}
+              等技术栈, 参与了 <a href="https://vuejs.org/">Vue.js</a>,{' '}
+              <a href="https://github.com/youzan/vant">Vant</a>,{' '}
+              <a href="https://semi.design/zh-CN">Semi Design</a>{' '}
+              等许多开源项目。
+            </Balancer>
+          </motion.p>
+          <motion.p
+            className="mt-2 text-base text-zinc-600 dark:text-zinc-400"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: 'spring',
+              damping: 30,
+              stiffness: 85,
+              duration: 0.3,
+              delay: 0.1,
+            }}
+          >
+            <Balancer>
+              除了编程之外，我还喜欢音乐、游泳、羽毛球。如果你恰好也在我现在居住的城市（目前在重庆），也许我们可以一起出去玩或者一起编程。欢迎通过以下方式和我交流：
+            </Balancer>
+          </motion.p>
+          <motion.div
+            className="mt-6 flex gap-6"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: 'spring',
+              damping: 50,
+              stiffness: 90,
+              duration: 0.35,
+              delay: 0.25,
+            }}
+          >
             <SocialLink
               href="https://github.com"
               aria-label="Follow on GitHub"
@@ -366,16 +417,29 @@ export default function Home({ articles }) {
               icon={MailIcon}
               rel="me"
             />
-            <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/03423fff5b194acc17176dcb1b39d4678d5ce31f7d61ad8c3b9529efdfe0de62/68747470733a2f2f6170692e76697369746f722e706c616e747265652e6d652f76697369746f722d62616467652f70763f6c6162656c3d76697369746f72266e616d6573706163653d78696579657a69363636266b65793d696e6465782e68746d6c26636f6c6f723d626c7565">
-            <img className='w-full' src="https://camo.githubusercontent.com/03423fff5b194acc17176dcb1b39d4678d5ce31f7d61ad8c3b9529efdfe0de62/68747470733a2f2f6170692e76697369746f722e706c616e747265652e6d652f76697369746f722d62616467652f70763f6c6162656c3d76697369746f72266e616d6573706163653d78696579657a69363636266b65793d696e6465782e68746d6c26636f6c6f723d626c7565" alt="visitors" data-canonical-src="https://api.visitor.plantree.me/visitor-badge/pv?label=visitor&amp;namespace=xieyezi666&amp;key=index.html&amp;color=blue" />
-              </a>
-          </div>
+            <a
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              href="https://camo.githubusercontent.com/03423fff5b194acc17176dcb1b39d4678d5ce31f7d61ad8c3b9529efdfe0de62/68747470733a2f2f6170692e76697369746f722e706c616e747265652e6d652f76697369746f722d62616467652f70763f6c6162656c3d76697369746f72266e616d6573706163653d78696579657a69363636266b65793d696e6465782e68746d6c26636f6c6f723d626c7565"
+            >
+              <img
+                className="w-full"
+                src="https://camo.githubusercontent.com/03423fff5b194acc17176dcb1b39d4678d5ce31f7d61ad8c3b9529efdfe0de62/68747470733a2f2f6170692e76697369746f722e706c616e747265652e6d652f76697369746f722d62616467652f70763f6c6162656c3d76697369746f72266e616d6573706163653d78696579657a69363636266b65793d696e6465782e68746d6c26636f6c6f723d626c7565"
+                alt="visitors"
+                data-canonical-src="https://api.visitor.plantree.me/visitor-badge/pv?label=visitor&amp;namespace=xieyezi666&amp;key=index.html&amp;color=blue"
+              />
+            </a>
+          </motion.div>
         </div>
       </Container>
       <Photos />
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
+            <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+              <PencilSwooshIcon className="h-5 w-5 flex-none" />
+              <span className="ml-2">近期文章</span>
+            </h2>
             {articles.map((article) => (
               <Article key={article.slug} article={article} />
             ))}

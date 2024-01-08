@@ -1,0 +1,142 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+  author: 'Brian Ketelsen',
+  date: '2019-10-09',
+  title: '2022 年终工作总结',
+  description: '关键词： 不负热爱，远赴山海!',
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+2022 年，走进长安汽车的第一年，一开始并不适应长安汽车的工作模式，遇到了一些问题，比如开发电脑从 Mac 过渡到 Windows，刚开始很难受，但是逐步花了很长时间去做了很多配置，最终通过总结一套完整的 Windows 配置工作流，适应了 Windows 系统 的开发生态，并在团队内输出了 Windows VS Code 的最佳实践的配置。另外还有例如产品的技术栈太老，逐步对代码和以及架构进行升级和优化，逐步过渡到现在的微前端架构模式。在这一年中，经历了很多，学习了很多，收获了很多，接下来具体展开讲讲。
+
+## 组件化
+
+初次接触 Incall 的前端代码，发现其配置复杂，代码晦涩难懂，架构也混乱不堪。为了解决这个问题，提出和贡献了如下解决方案：
+
+- **业务按照业务模块进行拆分**
+
+因为 Incall 的代码 不仅仅服务于智慧云控 APP，还服务于云控 SDK，所以主动提出了**组件化**的概念，组件化即是将业务按照业务模块来进行划分，每个业务抽象成一个业务组件，在前端的代码中即当作一个 `package`，每个 `package` 会暴露出对应的 `router`、`views`、`store`（路由、页面、状态）：
+
+```js
+import router from './router'
+import store from './store'
+import services from './services'
+
+const usePackage = () => ({
+  router,
+  store,
+  services,
+})
+
+export default usePackage
+```
+
+每个业务组件单独维护，从而实现代码的逻辑解耦，极大的提高了代码的可维护性。
+
+- **落地 Monorepo 架构模式**
+
+Incall 之前的架构，是对所有模块进行统一维护，代码架构非常混乱，无法实现上述按模块进行划分的需求。经过一系列的探索和尝试，最终确定了 `Yarn` + `Monorepo` 的方案，即将每个业务模块抽象成一个 `package`目录，然后在根目录开启 `workspace`，实现按需引入业务模块和单独管理业务模块的功能:
+
+```bash
+packages/
+├── appShell
+├── autoNavigation
+├── carAPA
+├── carManageMent
+├── carMessage
+├── carModel2D
+├── carModel3D
+├── carPreSet
+├── carRacing
+├── carReport
+├── carState
+├── cartest
+├── cartestObd
+├── cloudCar
+....
+```
+
+- **重构项目配置配置**
+
+之前的项目中，`main.js`(入口文件)，`vue.config.js`(项目配置文件) 及其复杂，难以读懂且难以维护。之后根据 Vue 的相关规范和生命周期及其初始化流程，重构了`main.js`文件：
+
+```js
+//js
+import '@changan-incall-sdk/shared/js/directives.js'
+import '@changan-incall-sdk/shared/js/powerSaving.js'
+import '@changan-incall-sdk/shared/globalFunc/globalFunc.js'
+
+// css
+import '@changan-incall-sdk/shared/style/common.scss'
+import '@changan-incall-sdk/shared/style/style.min.css'
+import '@changan-incall-sdk/shared/style/swiper.min.css'
+import '@changan-incall/incall-ui/lib/index/style.css'
+
+// app
+import Vue from 'vue'
+import { initApp } from './initApp'
+import { enhanceApp } from './enhance'
+
+enhanceApp(Vue).then(() => initApp(Vue))
+```
+
+通过良好的上下文语义，极大提高了代码的阅读性和可维护性。
+
+> 代码是给人看的，顺便交给机器运行。
+
+另外，之前的项目配置过于混乱且没有按照环境划分配置，所以也对 `vue.config.js`进行了优化：
+
+```js
+const {
+  useConstant,
+  useCssconfig,
+  useDevServerConfig,
+  useChainWebpackConfig,
+  useCommonModeWebpackConfig,
+  useProductionModeWebpackConfig,
+  useTranspileDependencies
+} = require("./scripts/vue.config.util")
+
+const { cssConfig } = useCssconfig()
+const { devServerConfig } = useDevServerConfig()
+const { transpileDependencies } = useTranspileDependencies()
+const { staticName, distFileName, entryPath, isPordution, isOpenMultiWorker } = useConstant()
+
+....
+```
+
+通过 hook 的形式，将每个配置项进行划分，同时适配 函数式编程，我们以后的项目中，主要会以 hooks 的形式进行编程，所以我们配置文件也约定俗成，命名按照 use 开头。
+
+## 组件库
+
+在这一年中负责维护 Incall UI 组件库，新增了 2 个组件，修复了若干 bug。
+
+> Incall UI 已经不满足于现在的业务需求，且不支持按需引入，加之还有很多问题，所以最终决定对 Incall UI 进行完整的重构。新的 Incall UI 会支持主题定制、按需引入、黑夜模式等新功能。
+
+## 微应用
+
+在组件化的基础上，开发出我们自有的“微应用框架”。将之前的每个组件当成一个微应用，实现业务模块的独立开发、独立维护、独立上线。
+
+之前的开发模式是：前端改动业务代码，然后重新打包，提交给原生，原生重新打包，提交给集成方，集成方再提交到应用商店，集成效率极其低下。现在利用微应用，即可实现远程自更新，节省了大量的集成时间。其实现的方式为，前端将微应用进行打包，生成 `.zip` 压缩文件，将微应用包上传到微应用管理平台，接着在管理平台上面对微应用进行发布，当用户发起微应用使用请求时，客户端即下载对应的微应用包，然后运行。此架构极大地提升了集成效率和团队内开发者的开发体验。
+
+除此之外，该架构模式还可以实现对 APP 技术栈的全面升级。微应用现在可独立维护，可以在每期迭代中，对原应用进行微应用拆分，并对每个微应用进行技术升级（例如升级到 Vue3.0 + TS），在接下来的版本迭代中，不断进行上面的步骤，最终即可实现 APP 技术栈的整体升级。
+
+## 前端规范和生态
+
+从我入职长安一直到 12 月之前，团队内一直没有一个比较完整的前端技术规范。所以用了两个月的时间，或许是某个周末，或许是某个深夜，结合团队的技术情况、项目情况、以及成员情况，制定了属于车云移动应用开发室的《前端技术规范小册》：
+
+[车云数字应用开发室-前端技术规范小册](http://tspdemo.changan.com.cn/changanauto-front-end-standard/)
+
+该小册涵盖了开发工具、技术栈规范、项目组织规范、git 工作流规范、构建规范、代码规范等各项前端涉及到的规范，以及提供了一系列前端开发插件，例如 VScode 插件，ESLint 插件、前端脚手架、各项技术栈的模版等等。同时还通过这样的方式，建立了团队内的 wiki 中心（再也不用天天翻聊天记录找文件了）。
+
+## 对外分享
+
+在深耕架构升级的同时，也积极和社区进行技术交流学习。代表长安汽车参加了[2022 年重庆前端技术交流分享会](https://zhuanlan.zhihu.com/p/581717444) 并进行了技术分享。分享的主题名称是：[长安汽车移动应用前端架构探索<span  class="i-carbon:play-outline inline-block vertical-middle ml-1 text-red-500" />](https://www.bilibili.com/video/BV1Nm4y1F7B9/?spm_id_from=333.999.0.0)。内容主要包括了长安汽车云控 App 前端架构的探索, 从最初的集中式开发模式到微前端架构模式, 技术栈也从 Option API 升级到 Composition API, 从 Javascript 升级到了 Typescript。
+
+此次对外分享获得非常好的反馈，有 3 个著名前端公众号对该项主题进行了转发分享，同时也获得了社区内其他小伙伴的高度赞扬！提升了长安汽车的前端技术影响力。
+
+## 说在最后
+
+2022 年是充满挑战的一年，疫情、高温、山火，每一件事都让人刻骨铭心，很感谢自己的一再坚持。同时也要感谢各位亲人、朋友、同事、领导的陪伴和支持，让我在这一年中收获了成长。2023 年 定当砥砺前行！不负热爱，远赴山海！

@@ -1,13 +1,15 @@
-export default {
+const seoConfig = {
   openGraph: {
     type: 'website',
-    locale: 'en_IE',
-    url: 'https://www.brian.dev/',
-    siteName: 'Brian Ketelsen',
+    locale: 'zh_CN',
+    url: 'http://www.xieyezi.com',
+    siteName: 'xieyezi',
   },
   twitter: {
-    handle: '@bketelsen',
-    site: '@bketelsen',
+    handle: '@xieyezi666',
+    site: '@xieyezi',
     cardType: 'summary_large_image',
   },
 }
+
+export default seoConfig
