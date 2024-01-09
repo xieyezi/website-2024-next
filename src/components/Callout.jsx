@@ -29,7 +29,7 @@ export function Callout({ type = 'note', title, children }) {
     <div
       className={clsx(
         'not-prose my-8 flex rounded-3xl p-6',
-        styles[type].container
+        styles[type].container,
       )}
     >
       <IconComponent className="h-8 w-8 flex-none" />

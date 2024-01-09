@@ -30,7 +30,7 @@ export async function generateRssFeed() {
   for (let article of articles) {
     let url = `${siteUrl}/articles/${article.slug}`
     let html = ReactDOMServer.renderToStaticMarkup(
-      <article.component isRssFeed />
+      <article.component isRssFeed />,
     )
 
     feed.addItem({

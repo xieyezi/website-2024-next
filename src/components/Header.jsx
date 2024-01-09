@@ -1,15 +1,29 @@
-import React from 'react'
-import Image from 'next/future/image'
+import clsx from 'clsx'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import { Popover, Transition } from '@headlessui/react'
-import clsx from 'clsx'
-import { motion, useMotionValue, useMotionTemplate } from 'framer-motion'
+import React, { Fragment, useEffect, useRef } from 'react'
+import {
+  motion,
+  useMotionValue,
+  useMotionTemplate,
+  AnimatePresence,
+} from 'framer-motion'
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+  useUser,
+} from '@clerk/nextjs'
 
-import { Container } from '@/components/Container'
+import { url } from '@/lib/url'
 import avatarImage from '@/images/xieyezi.jpg'
-
-import { Fragment, useEffect, useRef } from 'react'
+import { Container } from '@/components/Container'
+import { UserArrowLeftIcon } from '@/components/icons/UserArrowLeftIcon'
+import { GitHubIcon, MailIcon, GoogleBIcon } from '@/components/SocialIcons'
 
 function CloseIcon(props) {
   return (
@@ -150,7 +164,7 @@ function NavItem({ href, children }) {
           'relative block whitespace-nowrap px-3 py-2 transition',
           isActive
             ? 'text-lime-600 dark:text-lime-400'
-            : 'hover:text-lime-600 dark:hover:text-lime-400'
+            : 'hover:text-lime-600 dark:hover:text-lime-400',
         )}
       >
         {children}
@@ -223,7 +237,7 @@ function AvatarContainer({ className, ...props }) {
     <div
       className={clsx(
         className,
-        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10'
+        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10',
       )}
       {...props}
     />
@@ -244,7 +258,7 @@ function Avatar({ large = false, className, ...props }) {
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
           'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
-          large ? 'h-16 w-16' : 'h-9 w-9'
+          large ? 'h-16 w-16' : 'h-9 w-9',
         )}
         priority
       />
@@ -281,7 +295,7 @@ export function Header() {
       let scrollY = clamp(
         window.scrollY,
         0,
-        document.body.scrollHeight - window.innerHeight
+        document.body.scrollHeight - window.innerHeight,
       )
 
       if (isInitial.current) {
@@ -333,7 +347,7 @@ export function Header() {
 
       setProperty(
         '--avatar-image-transform',
-        `translate3d(${x}rem, 0, 0) scale(${scale})`
+        `translate3d(${x}rem, 0, 0) scale(${scale})`,
       )
 
       let borderScale = 1 / (toScale / scale)
@@ -370,7 +384,7 @@ export function Header() {
           'pointer-events-none relative z-50 mb-[var(--header-mb,0px)] flex flex-col',
           isHomePage
             ? 'h-[var(--header-height,180px)]'
-            : 'h-[var(--header-height,64px)]'
+            : 'h-[var(--header-height,64px)]',
         )}
         style={{
           height: 'var(--header-height)',
@@ -430,16 +444,90 @@ export function Header() {
                 <MobileNavigation className="pointer-events-auto md:hidden" />
                 <DesktopNavigation className="pointer-events-auto hidden md:block" />
               </div>
-              <div className="flex justify-end md:flex-1">
+              {/*<div className="flex justify-end md:flex-1">
                 <div className="pointer-events-auto">
                   <ModeToggle />
                 </div>
-              </div>
+              </div>*/}
+              <motion.div
+                className="flex justify-end gap-3 md:flex-1"
+                initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+              >
+                <UserInfo />
+                <div className="pointer-events-auto">
+                  <ModeToggle />
+                </div>
+              </motion.div>
             </div>
           </Container>
         </div>
       </motion.header>
       {isHomePage && <div style={{ height: 'var(--content-offset)' }} />}
     </>
+  )
+}
+
+function UserInfo() {
+  const pathname = usePathname()
+  const { user } = useUser()
+  const StrategyIcon = React.useMemo(() => {
+    const strategy = user?.primaryEmailAddress?.verification.strategy
+    if (!strategy) {
+      return null
+    }
+
+    switch (strategy) {
+      case 'from_oauth_github':
+        return GitHubIcon
+      case 'from_oauth_google':
+        return GoogleBIcon
+      default:
+        return MailIcon
+    }
+  }, [user?.primaryEmailAddress?.verification.strategy])
+
+  return (
+    <AnimatePresence>
+      <SignedIn key="user-info">
+        <motion.div
+          className="pointer-events-auto relative flex h-10 items-center"
+          initial={{ opacity: 0, x: 25 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 25 }}
+        >
+          <UserButton
+            afterSignOutUrl={url(pathname).href}
+            appearance={{
+              elements: {
+                avatarBox: 'w-9 h-9 ring-2 ring-white/20',
+              },
+            }}
+          />
+          {StrategyIcon && (
+            <span className="pointer-events-none absolute -bottom-1 -right-1 flex h-4 w-4 select-none items-center justify-center rounded-full bg-white dark:bg-zinc-900">
+              <StrategyIcon className="h-3 w-3" />
+            </span>
+          )}
+        </motion.div>
+      </SignedIn>
+      <SignedOut key="sign-in">
+        <motion.div
+          className="pointer-events-auto"
+          initial={{ opacity: 0, x: 25 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 25 }}
+        >
+          <SignInButton mode="modal" redirectUrl={url(pathname).href}>
+            <button
+              type="button"
+              className="group h-10 rounded-full bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 text-sm shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+            >
+              <UserArrowLeftIcon className="h-5 w-5" />
+            </button>
+          </SignInButton>
+        </motion.div>
+      </SignedOut>
+    </AnimatePresence>
   )
 }

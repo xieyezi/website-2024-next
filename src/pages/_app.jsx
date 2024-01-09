@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react'
+import { DefaultSeo } from 'next-seo'
+import { ClerkProvider } from '@clerk/nextjs'
 
+import SEO from './next-seo.config'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
-import SEO from './next-seo.config'
-import { DefaultSeo } from 'next-seo'
+import { zhCN } from '@/lib/clerkLocalizations'
 
 import '@/styles/tailwind.css'
 import 'focus-visible'
@@ -29,7 +31,7 @@ export default function App({ Component, pageProps, router }) {
   let previousPathname = usePrevious(router.pathname)
 
   return (
-    <>
+    <ClerkProvider localization={zhCN} {...pageProps}>
       <DefaultSeo {...SEO} />
       <MDXProvider components={components}>
         <div className="fixed inset-0 flex justify-center sm:px-8">
@@ -45,6 +47,6 @@ export default function App({ Component, pageProps, router }) {
           <Footer />
         </div>
       </MDXProvider>
-    </>
+    </ClerkProvider>
   )
 }

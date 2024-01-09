@@ -5,7 +5,7 @@ import { getAllLiam } from '@/lib/getAllLiam'
 import { formatMonthYear, formatDate } from '@/lib/formatDate'
 import siteMeta from '@/data/siteMeta'
 import liamsJourney from '@/images/liam/liamsjourney.png'
-import Image from 'next/future/image'
+import Image from 'next/image'
 import { Container } from '@/components/Container'
 
 function Article({ article }) {
@@ -127,7 +127,7 @@ export async function getStaticProps() {
   return {
     props: {
       articles: (await (await getAllLiam()).reverse()).map(
-        ({ component, ...meta }) => meta
+        ({ component, ...meta }) => meta,
       ),
     },
   }

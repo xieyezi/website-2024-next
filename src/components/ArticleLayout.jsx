@@ -95,22 +95,22 @@ export function ArticleLayout({
                   {meta.description}
                 </motion.p>
                 <motion.div
-                className="flex w-full items-center space-x-4 text-sm font-medium text-zinc-700/50 dark:text-zinc-300/50"
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.15,
-                  type: 'spring',
-                  stiffness: 150,
-                  damping: 20,
-                  delay: 0.255,
-                }}
-              >
-                <span className="inline-flex items-center space-x-1.5">
-                  <HourglassIcon />
-                  <span>大约需要24分钟阅读</span>
-                </span>
-              </motion.div>
+                  className="flex w-full items-center space-x-4 text-sm font-medium text-zinc-700/50 dark:text-zinc-300/50"
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.15,
+                    type: 'spring',
+                    stiffness: 150,
+                    damping: 20,
+                    delay: 0.255,
+                  }}
+                >
+                  <span className="inline-flex items-center space-x-1.5">
+                    <HourglassIcon />
+                    <span>大约需要24分钟阅读</span>
+                  </span>
+                </motion.div>
               </header>
               <Prose className="mt-6">{children}</Prose>
             </article>

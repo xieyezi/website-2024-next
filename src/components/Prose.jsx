@@ -12,7 +12,7 @@ export function Prose({ as: Component = 'div', className, ...props }) {
         // link underline
         // pre
         // hr
-        'dark:prose-hr:border-zinc-800'
+        'dark:prose-hr:border-zinc-800',
       )}
       {...props}
     />
