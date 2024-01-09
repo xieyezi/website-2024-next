@@ -220,8 +220,8 @@ function ModeToggle() {
       className="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
       onClick={toggleMode}
     >
-      <SunIcon className="h-6 w-6 fill-zinc-100 stroke-zinc-500 transition group-hover:fill-zinc-200 group-hover:stroke-zinc-700 dark:hidden [@media(prefers-color-scheme:dark)]:fill-lime-50 [@media(prefers-color-scheme:dark)]:stroke-lime-700 [@media(prefers-color-scheme:dark)]:group-hover:fill-lime-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-lime-700" />
-      <MoonIcon className="hidden h-6 w-6 fill-zinc-700 stroke-zinc-500 transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-400 [@media_not_(prefers-color-scheme:dark)]:fill-lime-400/10 [@media_not_(prefers-color-scheme:dark)]:stroke-lime-700" />
+      <SunIcon className="h-6 w-6 fill-zinc-100 stroke-zinc-900 transition group-hover:fill-zinc-200 group-hover:stroke-zinc-700 dark:hidden [@media(prefers-color-scheme:dark)]:fill-slate-50 [@media(prefers-color-scheme:dark)]:stroke-slate-700 [@media(prefers-color-scheme:dark)]:group-hover:fill-slate-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-slate-700" />
+      <MoonIcon className="hidden h-6 w-6 fill-zinc-700 stroke-zinc-500 transition dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-400 [@media_not_(prefers-color-scheme:dark)]:fill-slate-400/10 [@media_not_(prefers-color-scheme:dark)]:stroke-slate-50" />
     </button>
   )
 }
@@ -444,11 +444,6 @@ export function Header() {
                 <MobileNavigation className="pointer-events-auto md:hidden" />
                 <DesktopNavigation className="pointer-events-auto hidden md:block" />
               </div>
-              {/*<div className="flex justify-end md:flex-1">
-                <div className="pointer-events-auto">
-                  <ModeToggle />
-                </div>
-              </div>*/}
               <motion.div
                 className="flex justify-end gap-3 md:flex-1"
                 initial={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -521,9 +516,9 @@ function UserInfo() {
           <SignInButton mode="modal" redirectUrl={url(pathname).href}>
             <button
               type="button"
-              className="group h-10 rounded-full bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 text-sm shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+              className="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
             >
-              <UserArrowLeftIcon className="h-5 w-5" />
+              <UserArrowLeftIcon className="h-5 w-5 text-zinc-900 dark:text-zinc-100" />
             </button>
           </SignInButton>
         </motion.div>

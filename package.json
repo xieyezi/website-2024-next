@@ -19,6 +19,7 @@
     "@mdx-js/react": "^3",
     "@next/mdx": "^14",
     "@tailwindcss/typography": "^0.5.10",
+    "@upstash/redis": "^1.28.0",
     "autoprefixer": "^10.4.16",
     "clsx": "^2",
     "fast-glob": "^3.3.2",

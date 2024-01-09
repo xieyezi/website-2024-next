@@ -132,7 +132,7 @@ module.exports = {
           // Inline elements
           a: {
             color: 'var(--tw-prose-links)',
-            fontWeight: theme('fontWeight.semibold'),
+            fontWeight: theme('fontWeight.normal'),
             textDecoration: 'underline',
             textDecorationColor: 'var(--tw-prose-underline)',
             transitionProperty: 'color, text-decoration-color',
